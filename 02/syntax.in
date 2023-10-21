@@ -1,0 +1,61 @@
+program := {statement}
+statement := simple_statemnt {statement} | simple_statemnt
+simple_statemnt := declaration | assignment | if | ifelse | while | for | io | inc | dec
+
+declaration := simple_declaration | declaration_assignment 
+simple_declaration := "var" identifier ":" type ";"
+declaration_assignment := "var" identifier ":" type "=" expression ";"
+
+assignment := identifier "=" expression ";"
+
+simple_type := "number" | "decimal" | "str" | "car"
+type := simple_type | "vector<" simple_type ">" 
+
+identifier := letter | letter {letter} {digit}
+constant := number_const | decimal_const | str_const | car_const
+
+letter := "a" | "b" | ... | "z" | "A" | "B" | ... | "Z"
+digit := "0" | "1" | ... | "9"
+non_zero_digit := "1" | ... | "9"
+
+symbols := " " | "\n"
+car := letter | digit | symbols
+str := {car}
+
+number_const := ("+" | "-") number_const_simple | number_const_simple
+number_const_simple := non_zero_digit {digit} | "0"
+
+decimal_const := ("+" | "-") decimal_const_simple | decimal_const_simple
+decimal_const_simple := digit {digit} "." digit {digit}
+
+str_const := `{car}`
+car_const := "'" car "'"
+
+if := "fi" "(" condition ")" "{" {statement} "}" ["else" "{" {statement} "}"]
+ifelse := "fi" "(" condition ")" "{" {statement} "}" {("fiefi" "(" condition ")" "{" {statement} "}")} ["else" "{" {statement} "}"]
+
+while := "loop" "(" condition ")" "{" {statement} "}"
+
+for := "let" identifier "in" "seq(" sequence ") {" {statement} "}"
+sequence := start "," end "," step | start "," end | end
+start := expression | identifier | constant
+end := expression | identifier | constant
+step := expression | identifier | constant
+
+read := $"<<" identifier ";"
+print := "$>>" expression ";" | "$>>" identifier ";" | "$>>" constant ";"
+io := read | print
+
+condition := expression relation expression
+relation := "<" | ">" | "<=" | ">=" | "==" | "!="
+
+expression := normal_expression | sqrt_expression
+
+normal_expression := normal_expression {("+" | "-") term} | term
+term := term {("*" | "/" | "mod") factor} | factor
+factor := "(" normal_expression ")" | identifier | number_const | decimal_const
+
+sqrt_expression := "rad" "(" (identifier | number_const_simple | decimal_const_simple) ")"
+
+inc := "inc" identifier ";"
+dec := "dec" identifier ";"

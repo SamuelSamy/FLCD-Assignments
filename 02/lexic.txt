@@ -1,0 +1,33 @@
+Alphabet: 
+    - Upper (A-Z) and lower case letters (a-z) of the English alphabet
+    - Decimal Digits (0-9)
+
+
+1. Lexic
+
+a.
+- operators: inc, dec, =, ==, >=, <=, *, /, mod, +, -, <, >
+- separators: [] {} : ; space < > ( )
+- reserved words:
+    number, decimal, str, car, let, seq, loop, vector, fi, fie, fiefi, $<<, $>>, rad, var
+
+b. 
+
+identifier := letter | letter{letter}{digit}
+letter := "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+digit := "0" | "1" | ... | "9"
+non_zero_digit := "1" | ... | "9"
+
+number rule:
+    number_const := ("+" | "-") number | number
+    number := "0" | non_zero_digit{digit}
+
+deciaml rule:
+    decimal_const := ("+" | "-")decimal | decimal
+    decimal := number "." number
+
+car rule:
+    car := letter | digit
+
+string rule:
+    str := {car}

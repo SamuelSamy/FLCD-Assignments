@@ -1,0 +1,47 @@
+My SymbolTable uses a HashTable which can be used for either identifiers or constatns.
+
+The HashTable is implemented as a list of lists (Chain Hashing).
+
+My hash function can take any data type as input and returns an integer. 
+If the given key is not a string it converts it to a string. 
+It then sums the ASCII values of all the characters in the string and returns sum % table_size.
+
+The HashTable has the following methods:
+- hash(key): returns the hash value of the given key (identifier or constant)
+    - if the given key is not a string it converts it to a string
+    - it then sums the ASCII values of all the characters in the string and returns sum % table_size
+
+
+- insert(key, address = None): inserts a new identifier or constant into the table
+    - the method checks if the identifier or constant already exists in the table, if it does it does not insert it
+    - checks if the table is full, if it is it resizes it
+    - if the given address is None, the next available address is used
+    - it hashes the given identifier or constant and inserts it into the table using chain hashing
+
+    - it can take an extra parameter that spcifies an address (this is only used for the resize method)
+
+
+- search(key): searches for the given identifier or constant in the table
+    - it hashes the given identifier or constant
+    - it searches the hashed index for the given identifier or constant
+    - if it finds it, it returns a tuple containing the address and the identifier or constant
+    - if it does not find it, it returns None
+
+
+- search_by_address(address): searches for the given address in the table
+    - it searches the table for the given address
+    - if it finds it, it returns a tuple containing the address and the identifier or constant
+    - if it does not find it, it returns None
+
+
+- __resize(): resizes the table, this method is private
+    - copies the table into a temporary table
+    - doubles the max size of the table 
+    - reset the current size of the table to 0
+    - rehashes all the identifiers and constants into the new table
+    
+
+- __repr__ / __str__: returns a string representation of the table
+
+
+- debug(): a debug method that prints some information about the table

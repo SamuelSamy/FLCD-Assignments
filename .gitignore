@@ -1,0 +1,5 @@
+# Ignore any __pycache__ directories or files
+__pycache__/
+*.py[cod]
+.pyenv
+.ignored
