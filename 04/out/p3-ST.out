@@ -1,0 +1,7 @@
+ Address    Symbol
+---------  --------
+    0       array
+    1        len
+    2         i
+    3        sum
+    4         0

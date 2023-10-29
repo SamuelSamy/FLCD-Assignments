@@ -6,8 +6,8 @@ Alphabet:
 1. Lexic
 
 a.
-- operators: inc, dec, =, ==, >=, <=, *, /, mod, +, -, <, >
-- separators: [] {} : ; space < > ( )
+- operators: inc, dec, =, ==, >=, <=, *, /, %, +, -, <, >
+- separators: [ ] { } ( ) : ; space  \t \n
 - reserved words:
     number, decimal, str, car, let, seq, loop, vector, fi, fie, fiefi, $<<, $>>, rad, var
 

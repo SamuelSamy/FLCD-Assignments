@@ -52,7 +52,7 @@ relation := "<" | ">" | "<=" | ">=" | "==" | "!="
 expression := normal_expression | sqrt_expression
 
 normal_expression := normal_expression {("+" | "-") term} | term
-term := term {("*" | "/" | "mod") factor} | factor
+term := term {("*" | "/" | "%") factor} | factor
 factor := "(" normal_expression ")" | identifier | number_const | decimal_const
 
 sqrt_expression := "rad" "(" (identifier | number_const_simple | decimal_const_simple) ")"

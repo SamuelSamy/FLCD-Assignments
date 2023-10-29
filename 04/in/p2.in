@@ -1,0 +1,23 @@
+var n: number = 124;
+var a: x = abc"123";
+$<< n;
+
+fi (n == 2) {
+    $>> `Prime`;
+}
+
+fi (n % 2 == 0) {
+    $>> `Not prime`;
+}
+
+"sorana"
+
+var sqaureRoot: number = rad(n);
+
+let i in seq(3, sqaureRoot, 2) {
+    fi (n % i == 0) {
+        $>> `Not prime`;
+    }
+}
+
+$>> `Prime`;

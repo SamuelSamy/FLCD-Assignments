@@ -1,0 +1,2 @@
+class ScanningError(Exception):
+    pass

@@ -16,20 +16,22 @@ fi (n3 > max) {
 $>> max;
 
 // P2
+var n: number;
+
 $<< n;
 
 fi (n == 2) {
     $>> `Prime`;
 }
 
-fi (n mod 2 == 0) {
+fi (n % 2 == 0) {
     $>> `Not prime`;
 }
 
 var sqaureRoot: number = rad(n);
 
 let i in seq(3, sqaureRoot, 2) {
-    fi (n mod i == 0) {
+    fi (n % i == 0) {
         $>> `Not prime`;
     }
 }
@@ -60,15 +62,15 @@ $>> sum;
 
 // P1Err
 variable n1: number;
-var n2: integer;
+var n2: number;
 
 $<< n1;
 $<< n2;
 
 var max: number = n1;
 
-fi (n2 > max) {
-    max = n2;
+fi (n2 $ max) {
+    max | n2;
 }
 
 $>> max;
