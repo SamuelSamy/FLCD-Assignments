@@ -1,0 +1,10 @@
+https://github.com/SamuelSamy/FLCD-Assignments/tree/main/04
+
+The main file takes 2 parameters from the console: the code file and the token file.
+
+The code file is the file that contains the code to be analyzed.
+The token file is the file that contains the tokens to be analyzed.
+
+The program will output the result to the out folder.
+
+The scanner scans the code file character by character and checks each word to see if it is a reserved word, an identifier, a constant, a separator or an operator.
