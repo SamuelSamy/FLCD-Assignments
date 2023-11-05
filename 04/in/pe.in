@@ -1,4 +1,4 @@
-var n1: number;
+var n1: number = 'test'
 var n2: number;
 
 $<< n1;

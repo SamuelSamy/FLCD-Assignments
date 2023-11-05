@@ -1,5 +1,5 @@
-var n: number = 124;
-var a: x = abc"123";
+var n: number;
+var a: number;
 $<< n;
 
 fi (n == 2) {
@@ -9,8 +9,6 @@ fi (n == 2) {
 fi (n % 2 == 0) {
     $>> `Not prime`;
 }
-
-"sorana"
 
 var sqaureRoot: number = rad(n);
 

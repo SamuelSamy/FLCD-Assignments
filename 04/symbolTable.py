@@ -108,13 +108,13 @@ class SymbolTable:
         
         for list in to_print:
             for entry in list:
-                table.append([entry[1], entry[0]])
+                table.append([entry[1], entry[0], self.hash(entry[0])])
 
         # Sort the table by address
         table = sorted(table, key=lambda x: x[0]) if len(table) > 0 else [['-', '-']]
-        table = [['Address', 'Symbol']] + table
+        table = [['Address', 'Symbol', 'Hash Index']] + table
 
-        return tabulate(table, headers = 'firstrow', colalign=('center', 'center'))
+        return tabulate(table, headers = 'firstrow', colalign=('center', 'center', 'center'))
 
 
     # Debugging function

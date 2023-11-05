@@ -10,6 +10,7 @@ if len(sys.argv) != 3:
 file = sys.argv[1]
 tokens = sys.argv[2]
 
+
 scanner = Scanner(file, tokens)
 scanner.scan()
 

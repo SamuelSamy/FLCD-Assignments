@@ -1,14 +1,11 @@
-
-
-import json
 import re
 from token_type import TokenType
-
+  
 from tabulate import tabulate
 from exceptions import ScanningError
 from symbolTable import SymbolTable
-
-
+  
+  
 class Scanner:
 
     def __init__(
@@ -27,15 +24,13 @@ class Scanner:
 
     def scan(self):
         with open(self.file, 'r') as file:
-            file_content = file.read()
-
-        lines = file_content.split('\n')
+            lines = file.readlines()
 
         try:
             for index, line in enumerate(lines):
                 self.__parse_line(index, line)
         except ScanningError as error:
-            self.errors.append(str(error))
+            self.errors.append(f'{error}')
 
 
     def __parse_line(
@@ -49,26 +44,30 @@ class Scanner:
         line = line.strip()
         word = ''
         column = 0
-        is_in_string = False
         while column < len(line):
             char = line[column]
 
             # Check if the char is ` or '  and mark it as the start of the string
             if char in ['`', "'"]:
-                word += char
-
-                if is_in_string:
-                    self.__process_token(word, index)
+                starting_char = char
+                word = starting_char
+                column += 1
                 
+                while column < len(line) and line[column] != starting_char:
+                    char = line[column]
+                    word += char
+                    column += 1
+                
+                # If the string is not closed, we raise an error
+                if column == len(line):
+                    raise ScanningError(f'Invalid string at line {index + 1}')
+                
+                word += line[column]
                 column += 1
-                is_in_string = not is_in_string
-                continue
-            
-            # If we are in a string, we allow any character
-            if is_in_string:
-                word += char
-                column += 1
-                continue
+
+                # We process the string
+                self.__process_token(word, index)
+
 
             # If the char is a separator, we process the word and the separator
             if self.tokens['separators'].get(char) is not None:
@@ -82,7 +81,7 @@ class Scanner:
                 
             # If the char is an operator, we process the word and the operator
             if self.__is_operator(char):
-                
+
                 # a>2
                 # If the word is not empty, it means we have a word before the operator, therefore we process it
                 if word != '' and self.__is_identifier_or_constant(word):
@@ -104,10 +103,6 @@ class Scanner:
             word += char
             column += 1
 
-        # This means that a string was not closed and end of line was reached
-        if is_in_string:
-            raise ScanningError(f'Invalid string at line {index + 1}')
-        
         # We might have lines that do not end with a separator, so we process the last word
         if word != '':
             self.__process_token(word, index)
@@ -123,7 +118,7 @@ class Scanner:
             self.__process_non_identifier(word, TokenType.KEYWORD)
             return
         
-        if  self.__is_operator(word):
+        if self.__is_operator(word):
             self.__process_non_identifier(word, TokenType.OPERATOR)
             return
         
@@ -226,6 +221,7 @@ class Scanner:
 
     def get_symbol_table(self):
         return f'{self.symbol_table}'
+    
     
 
     def scan_message(self):

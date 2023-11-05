@@ -1,6 +1,13 @@
- Address    Symbol
----------  --------
-    0         n
-    1        124
-    2         a
-    3         x
+ Address      Symbol
+---------  ------------
+    0           n
+    1           a
+    2           2
+    3        `Prime`
+    4        `Prime`e
+    5           0
+    6      `Not prime`
+    7      `Not prime`e
+    8       sqaureRoot
+    9           i
+   10           3

@@ -8,3 +8,64 @@ The token file is the file that contains the tokens to be analyzed.
 The program will output the result to the out folder.
 
 The scanner scans the code file character by character and checks each word to see if it is a reserved word, an identifier, a constant, a separator or an operator.
+
+1. When we find either a ` or ' we start scanning the line until we find the same character. This is in order to check for string constants as any character is permited in this constants.
+2. If the current character is a separator we process the current word and then we process the separator. 
+3. If the current character is an operator, we take all character until we no longer find an operator and then we process the word (if we have any) and the operator.
+4. At the end of the process we check if we have any left-over words, if we do we process them as well.
+
+
+scan():
+    - read all lines
+    - for each line we run the __process_line function
+    - if there is any error we add it to the list of errors
+
+
+__parse_line(index, line):
+    - we parse the line character by character
+    - if we find a ` or ' we start scanning the line until we find the same character
+    - if we find a separator we process the current word and then we process the separator
+    - if we find an operator we take all character until we no longer find an operator and then we process the word (if we have any) and the operator
+    - at the end of the process we check if we have any left-over words, if we do we process them as well
+
+
+__process_token(word, line):
+    - if word is a reserved word, we add it to the pif table
+    - if the word is an operator we add it to the pif table
+    - if the word is an identifier we add it to the symbol table
+    - if the word is a constant we add it to the symbol table
+    - if none of the above we raise an error
+
+
+__process_separator(separator, line):
+    - if the separator is a space or a tab we ignore it
+    - we add the separator to the pif table
+
+
+__is_reserved_word(word):
+    - we check if the word is in the reserved words list
+
+
+__is_operator(word):
+    - we check if the word is in the operators list
+
+
+__is_separator(word):
+    - we check if the word is in the separators list
+
+
+__is_identifier_or_constant(word):
+    - we check if the word is an identifier or a constant
+
+
+__is_identifier(word):
+    - we check if the word is an identifier using regex
+
+__is_constant(word):
+    - we check if the word is a constant using regex
+
+
+__read_token_file(file):
+    - we read the token file line by line and we add the tokens to the reserved words, operators and separators lists
+    - the tokens categories are separated by a line that starts with === and ends with ===
+
