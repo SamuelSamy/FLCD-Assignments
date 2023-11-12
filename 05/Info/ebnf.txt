@@ -1,0 +1,19 @@
+file := states newLine alphabet newLine initialState newLine finalStates newLine transitions
+
+states := state {space state}
+state := {char}
+
+alphabet := char {space char}
+
+initialState := state
+
+finalStates := state {space state}
+
+transitions := transition {newLine transition}
+transition := state space char space state
+
+char := letter | digit
+letter := 'a' | 'b' | 'c' | ... | 'z' | 'A' | 'B' | 'C' | ... | 'Z'
+digit := '0' | '1' | '2' | ... | '9'
+space := ' '
+newLine := '\n'
