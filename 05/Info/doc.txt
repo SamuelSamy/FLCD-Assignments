@@ -1,5 +1,6 @@
 https://github.com/SamuelSamy/FLCD-Assignments/tree/main/05
 
+EBNF: https://github.com/SamuelSamy/FLCD-Assignments/blob/main/05/Info/ebnf.txt
 
 The FA class:
 __read_file(path):
