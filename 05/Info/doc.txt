@@ -1,0 +1,27 @@
+https://github.com/SamuelSamy/FLCD-Assignments/tree/main/05
+
+
+The FA class:
+__read_file(path):
+    - reads the lines of the given file
+    - the first line contains the set of states
+    - the second line contains the alphabet
+    - the third line contains the initial state
+    - the fourth line contains the set of final states
+    - the rest of the lines contain the transitions
+
+__check_sequence(sequence):
+    - checks if the given sequence is accepted by the FA
+    - it starts from the initial state and checks if it can go anywhere with the first letter of the sequence
+    - at each step the current_state is updated with the next state
+    - if we reach a state that has no transition with the current letter, the sequence is not accepted
+    - if we reach the end of the sequence and the current state is not a final state, the sequence is not accepted, otherwise it is
+
+
+In the scanner class the following were modified:
+__is_identifier(token):
+    - we now use the FA class to check if the token is an identifier or not
+
+__is_constant(token):
+    - we now use the FA class to check if the token is an integer constant, if it's not we use regex to try to match a double / string / char constant
+

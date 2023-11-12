@@ -1,0 +1,21 @@
+var n: number;
+var a: number;
+$<< n;
+
+fi (n == 2) {
+    $>> `Prime`;
+}
+
+fi (n % 2 == 0) {
+    $>> `Not prime`;
+}
+
+var sqaureRoot: number = rad(n);
+
+let i in seq(3, sqaureRoot, 2) {
+    fi (n % i == 0) {
+        $>> `Not prime`;
+    }
+}
+
+$>> `Prime`;

@@ -1,0 +1,17 @@
+var n1: number;
+var n2: number;
+var n3: number;
+
+$<< n1;
+$<< n2;
+$<< n3;
+
+var max: number = n1;
+
+fi(n2>=max){max=n2;}
+
+fi (n3 > max) {
+    max = n3;
+}
+
+$>> max;
