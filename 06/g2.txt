@@ -1,0 +1,37 @@
+Start SimpleStatement Statement Declaration Asignment If While For IO SimpleDeclaration AssignmentDeclaration Identifier Type Expression SimpleType Letter Digit NumberConstant StringConstant CharConstant Sign NumberConstantSimple NonZeroDigit StringConstantSimple Car Condition else Sequence ForValue Constant Read Write Relation SignedTerm Term SignedFactor Factor
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 = == >= <= * / + - < > % += -= *= /= %= && || ! != [ ] { } ( ) ; : , number decimal str car let seq loop vector fi fie fiefi $<< $>> rad var in ' `
+Start
+Start->SimpleStatement Start|SimpleStatement
+Statement->SimpleStatement Statement|Statement
+Statement->Declaration|Asignment|If|While|For|IO
+Declaration->SimpleDeclaration|AssignmentDeclaration
+SimpleDeclaration->var Identifier : Type ;
+AssignmentDeclaration->var Identifier : Type = Expression ;
+Assignment->Identifier = Expression ;
+SimpleType->number|decimal|str|car
+Type->SimpleType|vector < SimpleType >
+Identifier->Letter|Identifier Letter|Identifier Digit
+Constant->NumberConstant|StringConstant|CharConstant
+NumberConstant->Sign NumberConstantSimple|NumberConstantSimple
+NumberConstantSimple->NonZeroDigit|NumberConstantSimple Digit|0
+StringConstant->` StringConstantSimple `
+StringConstantSimple->StringConstantSimple Car|Car
+CarConstant->' Car '
+If->fi ( Condition ) { Statement }|fi ( Condition ) { Statement } else { Statement }
+While->loop ( Condition ) { Statement }
+For->let Identifier in seq ( Sequence ) { Statement }
+Sequence->ForValue , ForValue , ForValue|ForValue , ForValue|ForValue
+ForValue->Expression|Identifier|Constant
+Read->$<< Identifier ;
+Write->$>> Expression ;
+IO->Read|Write ;
+Condition->Expression Relation Condition
+Relation-><|>|<=|>=|==|!=
+Expression->Expression SignedTerm|Term
+SignedTerm->+ Term|- Term|Term
+Term->Term SignedFactor|Factor
+SignedFactor->* Factor|/ Factor|% Factor|Factor
+Factor->( Expression )|Identifier|NumberConstant
+Letter->a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|z|y|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+Digit->0|NonZeroDigit
+NonZeroDigit->1|2|3|4|5|6|7|8|9
