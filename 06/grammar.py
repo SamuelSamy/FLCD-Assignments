@@ -1,3 +1,6 @@
+import json
+
+
 class Grammar:
      
     def __init__(
@@ -20,8 +23,10 @@ class Grammar:
             self.nonterminals = lines[0].split()
             self.terminals = lines[1].split()
             self.startingPoint = lines[2]
+
             for index in range(3, len(lines)):
                 key, values = lines[index].split("->")
+
                 splitValues = values.split("|")
 
                 if key not in self.productionRules.keys():
@@ -31,16 +36,16 @@ class Grammar:
                     self.productionRules[key] += [val.strip()]
     
     def get_nonterminal_productions(self, nonterminal):
-        if nonterminal in self.productionRules :
+        if nonterminal in self.productionRules.keys():
             return self.productionRules[nonterminal]
         
             
-gramm = Grammar("06/g1.txt")
+gramm = Grammar("06/g2.txt")
 gramm.scan()
 
 print(gramm.nonterminals)
 print(gramm.terminals)
 print(gramm.startingPoint)
-print(gramm.productionRules)
+print(json.dumps(gramm.productionRules, indent = 2))
 
-print(gramm.get_nonterminal_productions("A"))
+print(json.dumps(gramm.get_nonterminal_productions("Start"), indent = 2))
