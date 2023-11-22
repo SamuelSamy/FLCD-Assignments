@@ -38,14 +38,4 @@ class Grammar:
     def get_nonterminal_productions(self, nonterminal):
         if nonterminal in self.productionRules.keys():
             return self.productionRules[nonterminal]
-        
-            
-gramm = Grammar("06/g2.txt")
-gramm.scan()
-
-print(gramm.nonterminals)
-print(gramm.terminals)
-print(gramm.startingPoint)
-print(json.dumps(gramm.productionRules, indent = 2))
-
-print(json.dumps(gramm.get_nonterminal_productions("Start"), indent = 2))
+    
