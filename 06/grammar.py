@@ -1,6 +1,3 @@
-import json
-
-
 class Grammar:
      
     def __init__(
@@ -35,7 +32,20 @@ class Grammar:
                 for val in splitValues:
                     self.productionRules[key] += [val.strip()]
     
-    def get_nonterminal_productions(self, nonterminal):
+
+    def get_nonterminal_productions(
+        self, 
+        nonterminal: str
+    ):
         if nonterminal in self.productionRules.keys():
             return self.productionRules[nonterminal]
     
+
+    def is_context_fre(self) -> bool:
+        for key in self.productionRules.keys():
+            values = key.split()
+
+            if len(values) > 1:
+                return False
+            
+        return True

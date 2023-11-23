@@ -1,6 +1,6 @@
 from grammar import Grammar
 
-gramm = Grammar("06/g1.txt")
+gramm = Grammar("06/g3.txt")
 gramm.scan()
 
 def print_menu():
@@ -44,7 +44,9 @@ def main():
             continue
 
         if choice == 6:
+            print(gramm.is_context_fre())
             continue
+
 
 
 if __name__ == '__main__':
