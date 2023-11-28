@@ -1,3 +1,4 @@
+from LL1 import LL1
 from grammar import Grammar
 
 gramm = Grammar("06/g4.txt")
@@ -10,7 +11,14 @@ def print_menu():
     print('4. Display production rules')
     print('5. Display productions of given nonterminal')
     print('6. Check if given grammar is context free grammar (CFG)')
-    print('7. Exit')
+    print('7. LL1 parser')
+    print('8. Exit')
+
+def LL1_parser():
+    ll1 = LL1(gramm)
+    ll1.FIRST()
+    print(ll1.firsts_set)
+
 
 def main():
     choice = 0
@@ -46,7 +54,13 @@ def main():
         if choice == 6:
             print(gramm.is_context_fre())
             continue
+        
+        if choice == 7:
+            LL1_parser()
+            continue
 
+        if choice == 8:
+            break
 
 
 if __name__ == '__main__':
