@@ -1,6 +1,6 @@
 from grammar import Grammar
 
-gramm = Grammar("06/g3.txt")
+gramm = Grammar("06/g4.txt")
 gramm.scan()
 
 def print_menu():
