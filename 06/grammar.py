@@ -1,3 +1,6 @@
+import typing
+
+
 class Grammar:
      
     def __init__(
@@ -14,12 +17,12 @@ class Grammar:
 
     
     def scan(self):
-        with open(self.file, 'r') as file:
+        with open(self.file, 'r', encoding = 'utf-8') as file:
             lines = file.readlines()
 
             self.nonterminals = lines[0].split()
             self.terminals = lines[1].split()
-            self.startingPoint = lines[2]
+            self.startingPoint = lines[2].strip()
 
             for index in range(3, len(lines)):
                 key, values = lines[index].split("->")
@@ -49,3 +52,25 @@ class Grammar:
                 return False
             
         return True
+
+
+    def get_rhs_productions(
+        self,
+        nonterminal: str
+    ) -> typing.List[typing.Tuple[str, typing.List[str]]]:
+        rhs_productions = []
+
+        for key, prods in self.productionRules.items():
+            for prod in prods:
+                nodes = prod.split()
+                result_nodes = nodes.copy()
+
+                for node in nodes:
+                    result_nodes.remove(node)
+
+                    if nonterminal == node:
+                        rhs_productions += [(key, result_nodes)]
+                        break 
+
+
+        return rhs_productions

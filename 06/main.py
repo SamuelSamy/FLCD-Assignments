@@ -1,3 +1,5 @@
+import json
+
 from LL1 import LL1
 from grammar import Grammar
 
@@ -17,7 +19,9 @@ def print_menu():
 def LL1_parser():
     ll1 = LL1(gramm)
     ll1.FIRST()
+    ll1.FOLLOW()
     print(ll1.firsts_set)
+    print(ll1.follow_set)
 
 
 def main():

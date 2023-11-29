@@ -1,0 +1,12 @@
+S A B C
+a b d g h
+S
+S->A C B
+S->C b b
+S->B a
+A->d a
+A->B C
+B->g
+B->ε
+C->h
+C->ε

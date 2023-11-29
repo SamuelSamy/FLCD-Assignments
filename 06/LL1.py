@@ -1,10 +1,17 @@
+from grammar import Grammar
+
+
 class LL1:
     def __init__(
         self,
-        grammar
+        grammar: Grammar
     ):
         self.grammar = grammar
         self.firsts_set = {}
+        self.follow_set = {}
+
+        self.EPSILON = "ε"
+
     
     def size_one_concat(self, terminal, nonterminals):
 
@@ -21,14 +28,14 @@ class LL1:
         all_nonterminals_contain_epsilon = True
 
         for elem in nonterminals:
-            if not "ε" in self.firsts_set[elem]:
+            if not self.EPSILON in self.firsts_set[elem]:
                 all_nonterminals_contain_epsilon = False
 
         if all_nonterminals_contain_epsilon:
             if terminal != "":
                 concat.add(terminal)
             else:
-                concat.add("ε")
+                concat.add(self.EPSILON)
         
         # first we put the first of the first nonterminal and if that contains ε we increase the index
         # and we put the first of the next element, we do this until the current elem does not contain ε
@@ -40,7 +47,7 @@ class LL1:
             current_first_values = self.firsts_set[nonterminals[index]]
 
             for elem in current_first_values:
-                if elem == "ε":
+                if elem == self.EPSILON:
                     nonterminal_contains_epsilon = True
                 else:
                     concat.add(elem)
@@ -111,7 +118,58 @@ class LL1:
             self.firsts_set = current_column 
                     
 
-           
+        
+    def FOLLOW(self):
+        
+        for nonterminal in self.grammar.nonterminals:
+            self.follow_set[nonterminal] = set()
+
+            if nonterminal == self.grammar.startingPoint:
+                self.follow_set[nonterminal].add(self.EPSILON)
+        
+        current_column = {}
+
+        while current_column != self.follow_set:
+            
+            for nonterminal in self.grammar.nonterminals:
+                
+                current_column[nonterminal] = self.follow_set[nonterminal] # Initialize the current column with the previous column
+
+                rhs_prods = self.grammar.get_rhs_productions(nonterminal)
+
+                for rhs_prod in rhs_prods:
+                    left_node = rhs_prod[0] # The left node of the production
+                    right_nodes = rhs_prod[1] # The right nodes of the production
+
+                    if len(right_nodes) == 0: # We do not have any nodes in the right hand side, therefore everything in follow(left_node) is in follow(nonterminal)
+                        current_column[nonterminal].update(self.follow_set[left_node])
+                        continue
+
+                    for i in range(len(right_nodes)): # Iterate through the nodes in the right hand side
+                        node = right_nodes[i]
+
+                        if node in self.grammar.terminals: # If the current node is a terminal, we add it to follow(nonterminal) and break
+                            current_column[nonterminal].add(node)
+                            break
+
+                        firsts = self.firsts_set[node] # Get the firsts of the current node
+
+                        current_column[nonterminal].update(firsts - {self.EPSILON}) # Add the firsts of the current node to follow(nonterminal) without epsilon
+
+                        if self.EPSILON not in firsts:
+                            break
+                            
+                        if i == len(right_nodes) - 1: # We reached the end of the right hand side and all the nodes contain epsilon
+                            current_column[nonterminal].update(self.follow_set[left_node]) # Add follow(left_node) to follow(nonterminal)
+
+            self.follow_set = current_column
+
+
+
+
+        
+
+
 
             
 
