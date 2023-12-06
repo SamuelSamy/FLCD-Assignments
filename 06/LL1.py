@@ -163,14 +163,4 @@ class LL1:
                             current_column[nonterminal].update(self.follow_set[left_node]) # Add follow(left_node) to follow(nonterminal)
 
             self.follow_set = current_column
-
-
-
-
-        
-
-
-
             
-
-    
