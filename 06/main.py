@@ -20,8 +20,10 @@ def LL1_parser():
     ll1 = LL1(gramm)
     ll1.FIRST()
     ll1.FOLLOW()
+    ll1.construct_parser_table()
     print(ll1.firsts_set)
     print(ll1.follow_set)
+    print(json.dumps(ll1.parser_table, indent=2))
 
 
 def main():

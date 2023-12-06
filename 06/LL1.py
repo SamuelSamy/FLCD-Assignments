@@ -1,3 +1,4 @@
+import json
 from grammar import Grammar
 
 
@@ -11,6 +12,8 @@ class LL1:
         self.follow_set = {}
 
         self.EPSILON = "ε"
+
+        self.parser_table = {}
 
     
     def size_one_concat(self, terminal, nonterminals):
@@ -163,4 +166,76 @@ class LL1:
                             current_column[nonterminal].update(self.follow_set[left_node]) # Add follow(left_node) to follow(nonterminal)
 
             self.follow_set = current_column
+
+    def get_production_first(self, prod: str):
+        nonterminals, terminal = [], ""
+        prod = prod.split()
+
+        if prod[0] in self.grammar.terminals + [self.EPSILON]:
+            return set(prod[0])
+
+        for node in prod:
+            if node in self.grammar.terminals + [self.EPSILON]:
+                terminal = node
+                break
+            nonterminals.append(node)
+        
+        return self.size_one_concat(terminal, nonterminals)
+        
+
+    def init_parser_table(self):
+        self.parser_table = {}
+
+        for nonterm in self.grammar.nonterminals:
+            self.parser_table[nonterm] = {}
+        
+        for term in self.grammar.terminals:
+            self.parser_table[term] = {}
+        
+        self.parser_table["$"] = {}
+
+        for node in self.parser_table.keys():
+            for term in self.grammar.terminals + ["$"]:
+                self.parser_table[node][term] = []  
+
+
+    def construct_parser_table(self):
+        self.init_parser_table()
+
+        self.parser_table["$"]["$"] = ("accept")
+
+        for term in self.grammar.terminals:
+            self.parser_table[term][term] += ("pop")
+
+        for nonterm in self.grammar.nonterminals:
+            for prod in self.grammar.get_nonterminal_productions(nonterm):
+                first = self.get_production_first(prod)
+
+                if self.EPSILON in first:
+                    follow = self.follow_set[nonterm]
+
+                    for node in follow:
+                        node = node if node != self.EPSILON else "$"
+                        self.parser_table[nonterm][node] += (prod) # TUPLE
+                
+                    first.remove(self.EPSILON)
+
+                for node in first:
+                    self.parser_table[nonterm][node] += (prod)
+        
+
+                
+
+
+
+
+
+
+
+        
+
+
+
             
+
+    
