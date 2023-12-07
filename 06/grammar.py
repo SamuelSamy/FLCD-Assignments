@@ -13,7 +13,7 @@ class Grammar:
         self.nonterminals = []
         self.terminals = []
         self.startingPoint = ""
-        self.productionRules = {}
+        self.production_rules = {}
 
     
     def scan(self):
@@ -29,23 +29,23 @@ class Grammar:
 
                 splitValues = values.split("|")
 
-                if key not in self.productionRules.keys():
-                    self.productionRules[key] = []
+                if key not in self.production_rules.keys():
+                    self.production_rules[key] = []
 
                 for val in splitValues:
-                    self.productionRules[key] += [val.strip()]
+                    self.production_rules[key] += [val.strip()]
     
 
     def get_nonterminal_productions(
         self, 
         nonterminal: str
     ):
-        if nonterminal in self.productionRules.keys():
-            return self.productionRules[nonterminal]
+        if nonterminal in self.production_rules.keys():
+            return self.production_rules[nonterminal]
     
 
     def is_context_fre(self) -> bool:
-        for key in self.productionRules.keys():
+        for key in self.production_rules.keys():
             values = key.split()
 
             if len(values) > 1:
@@ -60,7 +60,7 @@ class Grammar:
     ) -> typing.List[typing.Tuple[str, typing.List[str]]]:
         rhs_productions = []
 
-        for key, prods in self.productionRules.items():
+        for key, prods in self.production_rules.items():
             for prod in prods:
                 nodes = prod.split()
                 result_nodes = nodes.copy()
@@ -74,3 +74,6 @@ class Grammar:
 
 
         return rhs_productions
+    
+
+   

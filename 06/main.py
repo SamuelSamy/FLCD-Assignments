@@ -3,7 +3,7 @@ import json
 from LL1 import LL1
 from grammar import Grammar
 
-gramm = Grammar("06/g4.txt")
+gramm = Grammar("06/g2.txt")
 gramm.scan()
 
 def print_menu():
@@ -21,9 +21,33 @@ def LL1_parser():
     ll1.FIRST()
     ll1.FOLLOW()
     ll1.construct_parser_table()
-    print(ll1.firsts_set)
-    print(ll1.follow_set)
-    print(json.dumps(ll1.parser_table, indent=2))
+
+    # This floods the terminal for big grammars
+    # print(ll1.firsts_set)
+    # print(ll1.follow_set)
+    # print(json.dumps(ll1.parser_table, indent = 2))
+
+    # print(ll1.is_ll1_grammar())
+
+    # convert the sets to lists for json
+    firsts = {}
+    for key in ll1.firsts_set.keys():
+        firsts[key] = list(ll1.firsts_set[key])
+
+    follows = {}
+    for key in ll1.follow_set.keys():
+        follows[key] = list(ll1.follow_set[key])
+
+    with open("06/firsts_set.json", "w") as file:
+        json.dump(firsts, file, indent = 2)
+
+    with open("06/follow_set.json", "w") as file:
+        json.dump(follows, file, indent = 2)
+
+    with open("06/parser_table.json", "w") as file:
+        json.dump(ll1.parser_table, file, indent = 2)
+
+    
 
 
 def main():
@@ -48,7 +72,7 @@ def main():
             continue
 
         if choice == 4:
-            print(gramm.productionRules)
+            print(gramm.production_rules)
             continue
 
         if choice == 5:

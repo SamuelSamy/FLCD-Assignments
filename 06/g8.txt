@@ -1,0 +1,8 @@
+A Bcd Rad Bat
+1 0 123 2
+A
+A->123|A 0|Bcd
+Bcd->Rad|Bat
+Rad->1
+Bat->2
+A->0

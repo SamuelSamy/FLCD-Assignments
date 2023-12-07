@@ -15,6 +15,9 @@ class LL1:
 
         self.parser_table = {}
 
+        self.production_labels = {}
+        self.__label_productions()
+
     
     def size_one_concat(self, terminal, nonterminals):
 
@@ -76,6 +79,7 @@ class LL1:
 
             productions_of_nonterminal = self.grammar.get_nonterminal_productions(nonterminal)
 
+            # TODO: FIX - This breaks for the nonterminal 'Assignmnet' in g2.txt - productions_of_nonterminal is None => What should we do in this case?
             for production_string in productions_of_nonterminal:
                 # if the production of a nonterminal starts with terminal or epsilon
                 if production_string[0] in self.grammar.terminals or production_string[0] == 'ε':
@@ -167,12 +171,15 @@ class LL1:
 
             self.follow_set = current_column
 
+
     def get_production_first(self, prod: str):
         nonterminals, terminal = [], ""
         prod = prod.split()
 
         if prod[0] in self.grammar.terminals + [self.EPSILON]:
-            return set(prod[0])
+            result = set()
+            result.add(prod[0])
+            return result
 
         for node in prod:
             if node in self.grammar.terminals + [self.EPSILON]:
@@ -202,10 +209,10 @@ class LL1:
     def construct_parser_table(self):
         self.init_parser_table()
 
-        self.parser_table["$"]["$"] = ("accept")
+        self.parser_table["$"]["$"] += [("accept")]
 
         for term in self.grammar.terminals:
-            self.parser_table[term][term] += ("pop")
+            self.parser_table[term][term] += [("pop")]
 
         for nonterm in self.grammar.nonterminals:
             for prod in self.grammar.get_nonterminal_productions(nonterm):
@@ -216,20 +223,32 @@ class LL1:
 
                     for node in follow:
                         node = node if node != self.EPSILON else "$"
-                        self.parser_table[nonterm][node] += (prod) # TUPLE
+                        self.parser_table[nonterm][node].append([prod, self.production_labels[prod]])
                 
                     first.remove(self.EPSILON)
 
                 for node in first:
-                    self.parser_table[nonterm][node] += (prod)
+                    self.parser_table[nonterm][node].append([prod, self.production_labels[prod]])
         
 
                 
+    def __label_productions(self):
+        count = 0
+        for key in self.grammar.production_rules.keys():
+            for prod  in self.grammar.production_rules[key]:
+                self.production_labels[prod] = count + 1
+                count += 1
 
 
+    def is_ll1_grammar(self):
+        # Check if there are any conflicts in the parser table
 
+        for nonterm in self.parser_table.keys():
+            for term in self.parser_table[nonterm].keys():
+                if len(self.parser_table[nonterm][term]) > 1:
+                    raise Exception(f"Conflict in parser table for nonterminal {nonterm} and terminal {term} - {self.parser_table[nonterm][term]}") 
 
-
+        return True
 
 
         
