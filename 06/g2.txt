@@ -32,13 +32,13 @@ Write->$>> Expression ;
 IO->Read|Write
 Condition->Expression Relation Condition
 Relation-><|>|<=|>=|==|!=
-Expression->Term ExpressionP
+Expression->Term ExpressionP|Identifier|Constant
 ExpressionP->SignedTerm Term ExpressionP|ε
 SignedTerm->Sign|ε
 Term->Factor TermP
 TermP->SignedFactor TermP|ε
 SignedFactor->* Factor|/ Factor|% Factor|Factor
-Factor->( Expression )|Identifier|Constant
+Factor->( Expression )
 IdentifierCharacter->Letter|Digit
 Car->Letter|Digit
 Letter->a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|z|y|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
