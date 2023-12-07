@@ -79,7 +79,6 @@ class LL1:
 
             productions_of_nonterminal = self.grammar.get_nonterminal_productions(nonterminal)
 
-            # TODO: FIX - This breaks for the nonterminal 'Assignmnet' in g2.txt - productions_of_nonterminal is None => What should we do in this case?
             for production_string in productions_of_nonterminal:
                 # if the production of a nonterminal starts with terminal or epsilon
                 if production_string[0] in self.grammar.terminals or production_string[0] == 'ε':
