@@ -81,6 +81,7 @@ class LL1:
 
             for production_string in productions_of_nonterminal:
                 # if the production of a nonterminal starts with terminal or epsilon
+                production_string = production_string.split()
                 if production_string[0] in self.grammar.terminals or production_string[0] == 'ε':
                     self.firsts_set[nonterminal].add(production_string[0])
 
@@ -241,13 +242,15 @@ class LL1:
 
     def is_ll1_grammar(self):
         # Check if there are any conflicts in the parser table
+        ll1 = True
 
         for nonterm in self.parser_table.keys():
             for term in self.parser_table[nonterm].keys():
                 if len(self.parser_table[nonterm][term]) > 1:
-                    raise Exception(f"Conflict in parser table for nonterminal {nonterm} and terminal {term} - {self.parser_table[nonterm][term]}") 
+                    print(f"Conflict in parser table for nonterminal {nonterm} and terminal {term} {self.parser_table[nonterm][term]}") 
+                    ll1 = False
 
-        return True
+        return ll1
 
 
         

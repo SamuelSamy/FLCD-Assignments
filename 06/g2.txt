@@ -1,13 +1,13 @@
-Start ListOfStatements Statement Declaration Assignment If While For IO SimpleDeclaration AssignmentDeclaration Identifier Type Expression SimpleType Letter Digit NumberConstant StringConstant CharConstant Sign NumberConstantSimple NonZeroDigit StringConstantSimple Car Condition Sequence ForValue Constant Read Write Relation SignedTerm Term SignedFactor Factor IdentifierP StatementP NumberConstantSimpleP StringConstantSimpleP ExpressionP TermP IdentifierCharacter OptionalElse
+Start ListOfStatements Statement Declaration Assignment If While For IO DeclarationPrefix DeclarationSufix Identifier Type Expression SimpleType Letter Digit NumberConstant StringConstant CharConstant Sign NumberConstantSimple NonZeroDigit StringConstantSimple Car Condition Sequence ForValue Constant Read Write Relation SignedTerm Term SignedFactor Factor IdentifierP StatementP NumberConstantSimpleP StringConstantSimpleP ExpressionP TermP IdentifierCharacter OptionalElse
 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 = == >= <= * / + - < > % += -= *= /= %= && || ! != [ ] { } ( ) ; : , number decimal str car let seq loop vector fi fie fiefi $<< $>> rad var in ' `
 Start
 Start->ListOfStatements
 ListOfStatements->Statement StatementP
 StatementP->Statement StatementP|ε
 Statement->Declaration|Assignment|If|While|For|IO
-Declaration->SimpleDeclaration|AssignmentDeclaration
-SimpleDeclaration->var Identifier : Type ;
-AssignmentDeclaration->var Identifier : Type = Expression ;
+Declaration->DeclarationPrefix DeclarationSufix
+DeclarationPrefix->var Identifier : Type
+DeclarationSufix->;|= Expression ;
 Assignment->Identifier = Expression ;
 SimpleType->number|decimal|str|car
 Type->SimpleType|vector < SimpleType >
@@ -25,20 +25,20 @@ If->fi ( Condition ) { ListOfStatements } OptionalElse
 OptionalElse->fie { ListOfStatements }|ε
 While->loop ( Condition ) { ListOfStatements }
 For->let Identifier in seq ( Sequence ) { ListOfStatements }
-Sequence->ForValue , ForValue , ForValue|ForValue , ForValue|ForValue
-ForValue->Expression|Identifier|Constant
+Sequence->ForValue , ForValue , ForValue
+ForValue->Expression
 Read->$<< Identifier ;
 Write->$>> Expression ;
 IO->Read|Write
 Condition->Expression Relation Condition
 Relation-><|>|<=|>=|==|!=
 Expression->Term ExpressionP
-ExpressionP->SignedTerm ExpressionP|ε
-SignedTerm->+ Term|- Term|Term 
+ExpressionP->SignedTerm Term ExpressionP|ε
+SignedTerm->Sign|ε
 Term->Factor TermP
 TermP->SignedFactor TermP|ε
 SignedFactor->* Factor|/ Factor|% Factor|Factor
-Factor->( Expression )|Identifier|NumberConstant
+Factor->( Expression )|Identifier|Constant
 IdentifierCharacter->Letter|Digit
 Car->Letter|Digit
 Letter->a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|z|y|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z

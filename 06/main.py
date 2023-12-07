@@ -27,7 +27,7 @@ def LL1_parser():
     # print(ll1.follow_set)
     # print(json.dumps(ll1.parser_table, indent = 2))
 
-    # print(ll1.is_ll1_grammar())
+    print(ll1.is_ll1_grammar())
 
     # convert the sets to lists for json
     firsts = {}
