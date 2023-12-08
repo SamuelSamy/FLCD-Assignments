@@ -1,9 +1,11 @@
 import json
 
+from parser_out import ParserOutput
+
 from LL1 import LL1
 from grammar import Grammar
 
-gramm = Grammar("06/g2.txt")
+gramm = Grammar("06/g4.txt")
 gramm.scan()
 
 def print_menu():
@@ -47,13 +49,97 @@ def LL1_parser():
     with open("06/parser_table.json", "w") as file:
         json.dump(ll1.parser_table, file, indent = 2)
 
-    
+    seq = ""
+    with open("06/seq.txt", "r") as file:
+        seq = file.read()
+
+    output_seq = ll1.parse_sequence(seq)
+
+    with open("06/parsed_sequence.txt", "w") as file:
+        json.dump(output_seq, file)
+
+    parser = ParserOutput(ll1, output_seq)
+    parser.generate_parse_tree()
+    print(parser.print_parse_tree())
 
 
 def main():
     choice = 0
 
-    while choice != 7:
+
+
+
+
+
+
+
+
+
+
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+while choice != 7:
 
         print_menu()
 
