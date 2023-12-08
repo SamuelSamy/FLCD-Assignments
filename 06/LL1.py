@@ -1,4 +1,5 @@
 import json
+import typing
 from grammar import Grammar
 
 
@@ -81,6 +82,7 @@ class LL1:
 
             for production_string in productions_of_nonterminal:
                 # if the production of a nonterminal starts with terminal or epsilon
+                production_string = production_string.split()
                 if production_string[0] in self.grammar.terminals or production_string[0] == 'ε':
                     self.firsts_set[nonterminal].add(production_string[0])
 
@@ -222,12 +224,12 @@ class LL1:
 
                     for node in follow:
                         node = node if node != self.EPSILON else "$"
-                        self.parser_table[nonterm][node].append([prod, self.production_labels[prod]])
+                        self.parser_table[nonterm][node].append([prod, self.production_labels[f'{nonterm}`{prod}']])
                 
                     first.remove(self.EPSILON)
 
                 for node in first:
-                    self.parser_table[nonterm][node].append([prod, self.production_labels[prod]])
+                    self.parser_table[nonterm][node].append([prod, self.production_labels[f'{nonterm}`{prod}']])
         
 
                 
@@ -235,22 +237,82 @@ class LL1:
         count = 0
         for key in self.grammar.production_rules.keys():
             for prod  in self.grammar.production_rules[key]:
-                self.production_labels[prod] = count + 1
+                self.production_labels[f'{key}`{prod}'] = count + 1
                 count += 1
 
 
     def is_ll1_grammar(self):
         # Check if there are any conflicts in the parser table
+        ll1 = True
 
         for nonterm in self.parser_table.keys():
             for term in self.parser_table[nonterm].keys():
                 if len(self.parser_table[nonterm][term]) > 1:
-                    raise Exception(f"Conflict in parser table for nonterminal {nonterm} and terminal {term} - {self.parser_table[nonterm][term]}") 
+                    print(f"Conflict in parser table for nonterminal {nonterm} and terminal {term} {self.parser_table[nonterm][term]}") 
+                    ll1 = False
 
-        return True
+        return ll1
 
 
         
+    def parse_sequence(
+        self, 
+        sequence: str
+    ):
+        working_stack = []
+        input_stack = []
+        output = []
+
+        sequence = sequence.split()
+        
+        for char in sequence:
+            input_stack.append(char)
+        input_stack.append("$")
+        input_stack.reverse()
+
+
+        working_stack.append("$")
+        working_stack.append(self.grammar.startingPoint)
+
+        while not input_stack[-1] == "$" or not working_stack[-1] == "$":
+
+            input_top = input_stack[-1]
+            working_top = working_stack[-1]
+
+            pair = self.parser_table[working_top][input_top]
+
+            if len(pair) == 0:
+                return False, output
+            
+
+            if len(pair) == 1 and pair[0] == "pop":
+                input_stack.pop()
+                working_stack.pop()
+                continue
+
+            if len(pair) == 1 and pair[0] == "accept":
+                return True, output
+            
+            working_stack.pop()
+
+            if pair[0][0] != self.EPSILON:
+                prods = pair[0][0].split()
+                prods.reverse()
+                working_stack += prods
+                
+
+            output.append(pair[0][1])
+
+
+        return True, output
+
+
+
+    def get_production_by_label(self, index) -> typing.List[str]:
+        for key in self.production_labels.keys():
+            if self.production_labels[key] == index:
+                return key.split("`")[1].split()
+
 
 
 
