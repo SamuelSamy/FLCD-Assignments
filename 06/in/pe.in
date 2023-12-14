@@ -1,13 +1,18 @@
-var n1: number = 'test'
-var n2: number;
+var array: vector<number>;
+var len: number;
 
-$<< n1;
-$<< n2;
+$<< len;
 
-var max: number = n1;
-
-fi (n2 $ max) {
-    max | n2;
+loop (len > 0) {
+    len = len - 1;
+    $<< array[i];
 }
 
-$>> max;
+var sum: number = 0;
+
+loop (len 0) {
+    len = len - 1;
+    sum = sum + array[len];
+}   
+
+$>> sum;

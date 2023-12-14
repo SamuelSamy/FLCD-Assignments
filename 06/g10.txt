@@ -1,0 +1,23 @@
+program declaration_list statements declaration equal_expression var_type expression sign sign_and_expression term statement simple_stmt struct_stmt assignment_stmt input_output_stmt if_stmt else_stmt while_stmt condition relation
+; int float long unsigned char string = + - * / % read print ( ) { } " ' == != < > <= >= if else while identifier constant
+program
+program->declaration_list statements
+declaration_list->declaration declaration_list|ε
+declaration->var_type identifier equal_expression ;
+equal_expression->= expression|ε
+var_type->int|float|long|unsigned|char|string
+expression->term sign_and_expression
+sign_and_expression->sign expression|ε
+sign->+|-|*|/|%
+term->identifier|constant
+statements->statement statements|ε
+statement->simple_stmt|struct_stmt
+simple_stmt->assignment_stmt|input_output_stmt
+struct_stmt->if_stmt|while_stmt
+assignment_stmt->identifier = expression ;
+input_output_stmt->read ( term ) ;|print ( term ) ;
+if_stmt->if ( condition ) { statements } else_stmt
+else_stmt->else { statements }|ε
+while_stmt->while ( condition ) { statements }
+condition->expression relation expression
+relation->==|!=|<|>|<=|>=

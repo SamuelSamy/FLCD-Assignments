@@ -1,30 +1,27 @@
 {
   "Start": [
     "fi",
-    "var",
-    "loop",
-    "SimpleIdentifier",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "ListOfStatements": [
     "fi",
-    "var",
-    "loop",
-    "SimpleIdentifier",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "Statement": [
-    "fi",
-    "var",
-    "loop",
     "SimpleIdentifier",
-    "$>>",
-    "let",
-    "$<<"
+    "fi",
+    "loop",
+    "$<<",
+    "var",
+    "$>>"
   ],
   "Declaration": [
     "var"
@@ -38,56 +35,41 @@
   "While": [
     "loop"
   ],
-  "For": [
-    "let"
-  ],
   "IO": [
-    "$>>",
-    "$<<"
+    "$<<",
+    "$>>"
   ],
   "DeclarationPrefix": [
     "var"
   ],
   "DeclarationSufix": [
-    ";",
-    "="
+    "=",
+    ";"
   ],
   "Type": [
-    "car",
     "vector",
     "decimal",
     "str",
+    "car",
     "number"
   ],
   "Expression": [
-    "SimpleIdentifier",
-    "Constant"
+    "Constant",
+    "SimpleIdentifier"
   ],
   "SimpleType": [
-    "car",
-    "str",
+    "decimal",
     "number",
-    "decimal"
-  ],
-  "ExpPrefix": [
-    "SimpleIdentifier",
-    "Constant"
-  ],
-  "ExpSufix": [
-    "*",
-    "+",
-    "-",
-    "/",
-    "%",
-    "\u03b5"
+    "car",
+    "str"
   ],
   "Sign": [
     "+",
     "-"
   ],
   "Condition": [
-    "SimpleIdentifier",
-    "Constant"
+    "Constant",
+    "SimpleIdentifier"
   ],
   "Read": [
     "$<<"
@@ -96,37 +78,36 @@
     "$>>"
   ],
   "StatementP": [
+    "\u03b5",
     "fi",
-    "var",
-    "loop",
     "$>>",
     "SimpleIdentifier",
-    "\u03b5",
-    "let",
-    "$<<"
+    "loop",
+    "$<<",
+    "var"
   ],
   "OptionalElse": [
     "\u03b5",
     "fie"
   ],
   "Operand": [
-    "SimpleIdentifier",
-    "Constant"
+    "Constant",
+    "SimpleIdentifier"
   ],
   "Operator": [
+    "-",
     "*",
     "+",
     "%",
-    "-",
     "/"
   ],
   "Relation": [
-    "==",
-    "!=",
     "<",
-    ">",
     ">=",
-    "<="
+    "==",
+    ">",
+    "<=",
+    "!="
   ],
   "Identifier": [
     "SimpleIdentifier"
@@ -135,12 +116,16 @@
     "\u03b5",
     "["
   ],
-  "ConditionP": [
-    "==",
-    ">",
-    "<=",
-    "!=",
-    ">=",
-    "<"
+  "ExpressionP": [
+    "\u03b5",
+    "*",
+    "%",
+    "/",
+    "-",
+    "+"
+  ],
+  "ExpressionRightCond": [
+    "Constant",
+    "SimpleIdentifier"
   ]
 }

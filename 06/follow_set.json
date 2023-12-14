@@ -7,248 +7,209 @@
     "}"
   ],
   "Statement": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "Declaration": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "Assignment": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "If": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "While": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
-    "$>>",
-    "let",
-    "$<<"
-  ],
-  "For": [
     "fi",
-    "var",
-    "loop",
     "}",
-    "\u03b5",
-    "SimpleIdentifier",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "IO": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "DeclarationPrefix": [
-    ";",
-    "="
-  ],
-  "DeclarationSufix": [
-    "fi",
-    "var",
-    "loop",
-    "}",
-    "\u03b5",
-    "SimpleIdentifier",
-    "$>>",
-    "let",
-    "$<<"
-  ],
-  "Type": [
-    ";",
-    "="
-  ],
-  "Expression": [
-    "==",
-    ">",
-    "<=",
-    "]",
-    "!=",
-    ">=",
-    ",",
-    "<",
+    "=",
     ";"
   ],
+  "DeclarationSufix": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "Type": [
+    "=",
+    ";"
+  ],
+  "Expression": [
+    "]",
+    "<=",
+    "==",
+    "!=",
+    "<",
+    ";",
+    ")",
+    ">=",
+    ">"
+  ],
   "SimpleType": [
-    ";",
+    "=",
     ">",
-    "="
-  ],
-  "ExpPrefix": [
-    "==",
-    "*",
-    "+",
-    ">",
-    "<=",
-    "-",
-    "/",
-    "]",
-    "!=",
-    ">=",
-    "%",
-    "<",
-    ";",
-    ","
-  ],
-  "ExpSufix": [
-    "==",
-    ">",
-    "<=",
-    "]",
-    "!=",
-    ">=",
-    ",",
-    "<",
     ";"
   ],
   "Sign": [],
   "Condition": [
-    ")"
+    "{"
   ],
   "Read": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "Write": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "StatementP": [
     "\u03b5",
     "}"
   ],
   "OptionalElse": [
-    "fi",
-    "var",
-    "loop",
-    "}",
     "\u03b5",
-    "SimpleIdentifier",
+    "fi",
+    "}",
     "$>>",
-    "let",
-    "$<<"
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
   "Operand": [
-    "*",
-    "-",
-    "/",
-    ">=",
+    "<",
     "]",
+    "*",
+    "/",
     "%",
-    ";",
-    "==",
-    "+",
-    ">",
     "<=",
-    "!=",
-    ",",
-    "<"
+    ";",
+    "-",
+    ")",
+    ">=",
+    "==",
+    ">",
+    "+",
+    "!="
   ],
   "Operator": [
-    "SimpleIdentifier",
-    "Constant"
+    "Constant",
+    "SimpleIdentifier"
   ],
   "Relation": [
-    "SimpleIdentifier",
-    "Constant"
+    "Constant",
+    "SimpleIdentifier"
   ],
   "Identifier": [
-    "*",
-    "-",
-    "/",
-    "=",
-    ">=",
     "]",
+    "/",
     "%",
-    ";",
-    "in",
-    "==",
-    "+",
-    ">",
-    ":",
     "<=",
+    "==",
+    "=",
+    "+",
     "!=",
-    ",",
-    "<"
+    "<",
+    "*",
+    ";",
+    "-",
+    ")",
+    ">=",
+    ">",
+    ":"
   ],
   "IdentifierSufix": [
-    "*",
-    "-",
-    "/",
-    "=",
-    ">=",
     "]",
+    "/",
     "%",
-    ";",
-    "in",
-    "==",
-    "+",
-    ">",
-    ":",
     "<=",
+    "==",
+    "=",
+    "+",
     "!=",
-    ",",
-    "<"
+    "<",
+    "*",
+    ";",
+    "-",
+    ")",
+    ">=",
+    ">",
+    ":"
   ],
-  "ConditionP": [
-    ")"
+  "ExpressionP": [
+    "<",
+    "]",
+    "<=",
+    ";",
+    ")",
+    ">=",
+    "==",
+    ">",
+    "!="
+  ],
+  "ExpressionRightCond": [
+    "{"
   ]
 }

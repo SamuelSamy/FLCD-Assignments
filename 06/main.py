@@ -109,7 +109,7 @@ def main():
 
 
 def create_sequence():
-    scanner = Scanner("06/in/p3.in", "06/in/token.in")
+    scanner = Scanner("06/in/pe.in", "06/in/token.in")
     scanner.scan()
     pif = scanner.pif_table
 

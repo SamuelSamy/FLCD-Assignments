@@ -1,30 +1,28 @@
-Start ListOfStatements Statement Declaration Assignment If While For IO DeclarationPrefix DeclarationSufix Type Expression SimpleType ExpPrefix ExpSufix Sign Condition Read Write StatementP OptionalElse Operand Operator Relation Identifier IdentifierSufix ConditionP
+Start ListOfStatements Statement Declaration Assignment If While IO DeclarationPrefix DeclarationSufix Type Expression SimpleType Sign Condition Read Write StatementP OptionalElse Operand Operator Relation Identifier IdentifierSufix ExpressionP ExpressionRightCond
 SimpleIdentifier Constant != == >= <= > < { } ( ) [ ] : ; ` ' , $<< $>> var fi fie loop let in seq = vector number decimal str car + - * / %
 Start
 Start->ListOfStatements
 ListOfStatements->Statement StatementP
 StatementP->Statement StatementP|ε
-Statement->Declaration|Assignment|If|While|For|IO
+Statement->Declaration|Assignment|If|While|IO
 Declaration->DeclarationPrefix DeclarationSufix
 DeclarationPrefix->var Identifier : Type
 DeclarationSufix->;|= Expression ;
 Assignment->Identifier = Expression ;
 SimpleType->number|decimal|str|car
 Type->SimpleType|vector < SimpleType >
-If->fi ( Condition ) { ListOfStatements } OptionalElse
+If->fi ( Condition { ListOfStatements } OptionalElse
 OptionalElse->fie { ListOfStatements }|ε
-While->loop ( Condition ) { ListOfStatements }
-For->let Identifier in seq ( Expression , Expression , Expression ) { ListOfStatements }
+While->loop ( Condition { ListOfStatements }
 Read->$<< Identifier ;
 Write->$>> Expression ;
 IO->Read|Write
-Condition->Expression ConditionP
-ConditionP->Relation Expression
+Condition->Expression Relation ExpressionRightCond
+ExpressionRightCond->Expression )
 Relation-><|>|<=|>=|==|!=
 Operator->+|-|*|/|%
-Expression->ExpPrefix ExpSufix
-ExpPrefix->Operand 
-ExpSufix->Operator Operand|ε
+Expression->Operand ExpressionP
+ExpressionP->Operator Expression|ε
 Operand->Identifier|Constant
 Sign->+|-
 Identifier->SimpleIdentifier IdentifierSufix
