@@ -1,4 +1,4 @@
-Start ListOfStatements Statement Declaration Assignment If While For IO DeclarationPrefix DeclarationSufix Identifier Type Expression SimpleType Letter Digit NumberConstant StringConstant CharConstant Sign NumberConstantSimple NonZeroDigit StringConstantSimple Car Condition Sequence ForValue Constant Read Write Relation SignedTerm Term SignedFactor Factor IdentifierP StatementP NumberConstantSimpleP StringConstantSimpleP ExpressionP TermP IdentifierCharacter OptionalElse
+Start ListOfStatements Statement Declaration Assignment If While For IO DeclarationPrefix DeclarationSufix Identifier Type Expression SimpleType Letter Digit NumberConstant StringConstant ExpPrefix ExpSuffix CharConstant Sign NumberConstantSimple NonZeroDigit StringConstantSimple Car Condition Sequence ForValue Constant Read Write Relation IdentifierP StatementP NumberConstantSimpleP StringConstantSimpleP IdentifierCharacter OptionalElse Operand Operator
 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 = == >= <= * / + - < > % += -= *= /= %= && || ! != [ ] { } ( ) ; : , number decimal str car let seq loop vector fi fie fiefi $<< $>> rad var in ' `
 Start
 Start->ListOfStatements
@@ -30,15 +30,13 @@ ForValue->Expression
 Read->$<< Identifier ;
 Write->$>> Expression ;
 IO->Read|Write
-Condition->Expression Relation Condition
+Condition->Expression Relation Expression
 Relation-><|>|<=|>=|==|!=
-Expression->Term ExpressionP|Identifier|Constant
-ExpressionP->SignedTerm Term ExpressionP|ε
-SignedTerm->Sign|ε
-Term->Factor TermP
-TermP->SignedFactor TermP|ε
-SignedFactor->* Factor|/ Factor|% Factor|Factor
-Factor->( Expression )
+Expression->ExpPrefix ExpSuffix
+ExpPrefix->Operand 
+ExpSuffix->Operator Operand|ε
+Operator->+|-|*|/|%
+Operand->Identifier|Constant
 IdentifierCharacter->Letter|Digit
 Car->Letter|Digit
 Letter->a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|z|y|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z

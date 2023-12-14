@@ -5,7 +5,7 @@ from parser_out import ParserOutput
 from LL1 import LL1
 from grammar import Grammar
 
-gramm = Grammar("06/g4.txt")
+gramm = Grammar("06/g2.txt")
 gramm.scan()
 
 def print_menu():

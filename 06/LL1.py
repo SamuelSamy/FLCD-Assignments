@@ -80,6 +80,9 @@ class LL1:
 
             productions_of_nonterminal = self.grammar.get_nonterminal_productions(nonterminal)
 
+            if productions_of_nonterminal is None:
+                raise Exception(f"Nonterminal {nonterminal} does not have any productions")
+
             for production_string in productions_of_nonterminal:
                 # if the production of a nonterminal starts with terminal or epsilon
                 production_string = production_string.split()
