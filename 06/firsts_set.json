@@ -1,22 +1,146 @@
 {
-  "S": [
-    "(",
-    "a"
+  "Start": [
+    "fi",
+    "var",
+    "loop",
+    "SimpleIdentifier",
+    "$>>",
+    "let",
+    "$<<"
   ],
-  "A": [
+  "ListOfStatements": [
+    "fi",
+    "var",
+    "loop",
+    "SimpleIdentifier",
+    "$>>",
+    "let",
+    "$<<"
+  ],
+  "Statement": [
+    "fi",
+    "var",
+    "loop",
+    "SimpleIdentifier",
+    "$>>",
+    "let",
+    "$<<"
+  ],
+  "Declaration": [
+    "var"
+  ],
+  "Assignment": [
+    "SimpleIdentifier"
+  ],
+  "If": [
+    "fi"
+  ],
+  "While": [
+    "loop"
+  ],
+  "For": [
+    "let"
+  ],
+  "IO": [
+    "$>>",
+    "$<<"
+  ],
+  "DeclarationPrefix": [
+    "var"
+  ],
+  "DeclarationSufix": [
+    ";",
+    "="
+  ],
+  "Type": [
+    "car",
+    "vector",
+    "decimal",
+    "str",
+    "number"
+  ],
+  "Expression": [
+    "SimpleIdentifier",
+    "Constant"
+  ],
+  "SimpleType": [
+    "car",
+    "str",
+    "number",
+    "decimal"
+  ],
+  "ExpPrefix": [
+    "SimpleIdentifier",
+    "Constant"
+  ],
+  "ExpSufix": [
+    "*",
+    "+",
+    "-",
+    "/",
+    "%",
+    "\u03b5"
+  ],
+  "Sign": [
+    "+",
+    "-"
+  ],
+  "Condition": [
+    "SimpleIdentifier",
+    "Constant"
+  ],
+  "Read": [
+    "$<<"
+  ],
+  "Write": [
+    "$>>"
+  ],
+  "StatementP": [
+    "fi",
+    "var",
+    "loop",
+    "$>>",
+    "SimpleIdentifier",
     "\u03b5",
-    "+"
+    "let",
+    "$<<"
   ],
-  "B": [
-    "(",
-    "a"
-  ],
-  "C": [
+  "OptionalElse": [
     "\u03b5",
-    "*"
+    "fie"
   ],
-  "D": [
-    "(",
-    "a"
+  "Operand": [
+    "SimpleIdentifier",
+    "Constant"
+  ],
+  "Operator": [
+    "*",
+    "+",
+    "%",
+    "-",
+    "/"
+  ],
+  "Relation": [
+    "==",
+    "!=",
+    "<",
+    ">",
+    ">=",
+    "<="
+  ],
+  "Identifier": [
+    "SimpleIdentifier"
+  ],
+  "IdentifierSufix": [
+    "\u03b5",
+    "["
+  ],
+  "ConditionP": [
+    "==",
+    ">",
+    "<=",
+    "!=",
+    ">=",
+    "<"
   ]
 }

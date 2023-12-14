@@ -285,6 +285,7 @@ class LL1:
             pair = self.parser_table[working_top][input_top]
 
             if len(pair) == 0:
+                raise Exception(f"Sequence is not valid. No production found for nonterminal {working_top} and terminal {input_top}")
                 return False, output
             
 

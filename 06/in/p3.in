@@ -1,0 +1,18 @@
+var array: vector<number>;
+var len: number;
+
+$<< len;
+
+loop (len > 0) {
+    len = len - 1;
+    $<< array[i];
+}
+
+var sum: number = 0;
+
+loop (len > 0) {
+    len = len - 1;
+    sum = sum + array[len];
+}   
+
+$>> sum;
