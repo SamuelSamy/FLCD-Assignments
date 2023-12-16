@@ -21,6 +21,13 @@ class LL1:
 
     
     def size_one_concat(self, terminal, nonterminals):
+        """
+        The size_one_concat function in context-free grammar analysis combines the FIRST sets of a sequence of non-terminals, optionally starting with a terminal symbol. 
+        It returns an empty set for no non-terminals and directly returns the FIRST set for a single non-terminal. 
+        If all non-terminals can derive epsilon (ε), it adds a given terminal to the set, or ε if no terminal is provided. 
+        Concatenation logic is the following: Iteratively adds symbols from each non-terminal FIRST set to a concat set, excluding ε, until it encounters a non-terminal that doesn't derive ε. 
+        Finally, it returns the concat set, representing the combined FIRST set of the given sequence of non-terminals and the initial terminal.
+        """
 
         if len(nonterminals) == 0:
             return set() # it means that we have added the terminals 
@@ -70,6 +77,15 @@ class LL1:
 
     
     def FIRST(self):
+        """
+        The code initializes empty FIRST sets for each non-terminal in the grammar. 
+        It populates the FIRST sets with terminals or epsilon directly derivable from non-terminals. 
+        The algorithm enters a loop to iteratively refine the FIRST sets. During each iteration, the FIRST set of each non-terminal is updated based on its productions. 
+        The process identifies the first terminal symbol in each production or accumulates non-terminals until a terminal is encountered. 
+        The function, size_one_concat() is used for combining these symbols to update the FIRST set. 
+        The loop continues until there are no changes in any FIRST set during an iteration. 
+        Finally, self.firsts_set holds the complete FIRST sets for each non-terminal, marking the end of the computation.
+        """
         
         # we have to compute FIRST of each nonterminal
         nonterminals_list = self.grammar.nonterminals
@@ -131,7 +147,19 @@ class LL1:
 
         
     def FOLLOW(self):
-        
+        """
+        Firstly the function initializes the follow set for each nonterminal with an empty set (except for the starting point which contains epsilon)
+        The algorithm stops when the current column is equal to the previous column
+        For each nonterminal we initialize the current column with the previous column. Then we use the `get_rhs_productions` function to get the productions in which the nonterminal appears in the right hand side.
+        For each production we get the left node and the right nodes. 
+        If the right nodes are empty we add the follow of the left node to current's node follow set.
+        If the right nodes are not empty we iterate through them.
+            - If the current node is a terminal we add it to the current node's follow set and break
+            - We get the firsts of the current node and add them to the current node's follow set without epsilon
+            - If the current node's firsts do not contain epsilon we break
+            - If we reached the end of the right nodes and all of them contain epsilon we add the follow of the left node to the current node's follow set
+        """
+
         for nonterminal in self.grammar.nonterminals:
             self.follow_set[nonterminal] = set()
 
@@ -177,6 +205,12 @@ class LL1:
 
 
     def get_production_first(self, prod: str):
+        """
+        This function computes the FIRST set of a production rule.
+        - If the production rule starts with a terminal, the FIRST set is the terminal itself.
+        - If the production rule does not start with a terminal, we iterate through the symbols in the production rule until we find a terminal adding everything to a list of nonterminals.
+        - We then call the size_one_concat function to compute the FIRST set of the nonterminals and the initial terminal.
+        """
         nonterminals, terminal = [], ""
         prod = prod.split()
 
@@ -195,6 +229,15 @@ class LL1:
         
 
     def init_parser_table(self):
+        """
+        Sets up an initial parsing table for a given grammar. 
+        It starts by creating an empty dictionary called parser_table, which will hold the parsing table. 
+        For each non-terminal in the grammar, it adds a row in the table with an empty dictionary as its initial value. 
+        Similarly, it adds rows for each terminal in the grammar, each initialized with an empty dictionary. 
+        The function includes a special row for the end-of-input marker, $. 
+        It then populates each cell of the table (corresponding to a pair of row and column headers) with empty lists. 
+        These cells are intersections of non-terminals and terminals, including the end-of-input marker.
+        """
         self.parser_table = {}
 
         for nonterm in self.grammar.nonterminals:
@@ -211,6 +254,15 @@ class LL1:
 
 
     def construct_parser_table(self):
+        """
+        It begins by calling init_parser_table() to create an initial, empty parser table. 
+        Then, it sets an "accept" action for the end-of-input marker ($) in the parser table, indicating the successful completion of parsing. 
+        For each terminal, a "pop" action is added, instructing the parser to remove the terminal from the stack when it matches the input symbol. 
+        The function iterates over each non-terminal and its productions. 
+            - For each production, it computes the FIRST set (first). If epsilon (ε) is in the FIRST set, the FOLLOW set of the non-terminal (follow) is used. 
+            - Each symbol in the FOLLOW set is mapped to the production in the parser table, with a special case handling for ε, which is replaced by $. 
+            - For each symbol in the FIRST set (excluding ε), the production is added to the corresponding cell in the parser table. 
+        """
         self.init_parser_table()
 
         self.parser_table["$"]["$"] += [("accept")]
@@ -237,6 +289,11 @@ class LL1:
 
                 
     def __label_productions(self):
+        """
+        This method assigns unique labels to each production rule. 
+        It iterates through the production rules and assigns an incrementing number as a label to each rule. 
+        These labels are stored in self.production_labels for easy reference and are used in construct_parser_table to include alongside productions in the parser table.
+        """
         count = 0
         for key in self.grammar.production_rules.keys():
             for prod  in self.grammar.production_rules[key]:
@@ -245,7 +302,10 @@ class LL1:
 
 
     def is_ll1_grammar(self):
-        # Check if there are any conflicts in the parser table
+        """
+        This method checks if the grammar is LL1.
+        It iteraters through the parser table and checks if there are any conflicts in the table.
+        """
         ll1 = True
 
         for nonterm in self.parser_table.keys():
@@ -262,6 +322,21 @@ class LL1:
         self, 
         sequence: str
     ):
+        """
+        This method parses a given sequence using the parser table.
+        It starts by initializing the working stack and input stack with the sequence.
+        The working stack is initialized with the starting point of the grammar and the input stack is initialized with the sequence.
+        The algorithm iterates until the input stack and the working stack are empty.
+            - It gets the top of the input stack and the top of the working stack.
+            - It gets the production from the parser table for the given nonterminal and terminal.
+                - If the production is empty, it means that the sequence is not valid and an exception is raised.
+                - If the production is "pop", it means that the parser should pop the top of the input stack and the top of the working stack.
+                - If the production is "accept", it means that the sequence is valid and the algorithm returns True.
+                - If the production is not empty, it means that the parser should replace the top of the working stack with the production.
+            - The algorithm appends the production to the output stack.
+        This method returns a tuple containing a boolean value and the output stack. (the boolean value indicates if the sequence is valid or not)
+        """
+
         working_stack = []
         input_stack = []
         output = []
@@ -313,6 +388,9 @@ class LL1:
 
 
     def get_production_by_label(self, index) -> typing.List[str]:
+        """
+        This method returns the production rule corresponding to a given label.
+        """
         for key in self.production_labels.keys():
             if self.production_labels[key] == index:
                 return key.split("`")[1].split()

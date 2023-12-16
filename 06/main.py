@@ -109,6 +109,15 @@ def main():
 
 
 def create_sequence():
+    """
+    Create a sequence of tokens from the input file
+    Initialize the scanner with the input file and the token file and scan the input file
+    Create a dictionary of tokens and their with the value position in the token file as the key and the token as the value
+    We iterate through the PIF and for each token:
+        - We check if it is 1 (SimpleIdentifier) or 2 (Constant) and we append the corresponding string to the sequence
+        - If it is not 1 or 2, we get the token from the dictionary and append it to the sequence
+    We write the sequence to the sequence file
+    """
     scanner = Scanner("06/in/pe.in", "06/in/token.in")
     scanner.scan()
     pif = scanner.pif_table
