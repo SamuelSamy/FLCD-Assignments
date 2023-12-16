@@ -1,0 +1,10 @@
+var array: vector<number>;
+var len: number;
+
+$<< len;
+
+fi (len > 2) {
+    $>> 5;
+}
+
+$>> sum;

@@ -1,26 +1,215 @@
 {
-  "S": [
-    "\u03b5",
-    ")"
+  "Start": [
+    "\u03b5"
   ],
-  "A": [
+  "ListOfStatements": [
     "\u03b5",
-    ")"
+    "}"
   ],
-  "B": [
-    "+",
+  "Statement": [
     "\u03b5",
-    ")"
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
   ],
-  "C": [
+  "Declaration": [
     "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "Assignment": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "If": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "While": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "IO": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "DeclarationPrefix": [
+    "=",
+    ";"
+  ],
+  "DeclarationSufix": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "Type": [
+    "=",
+    ";"
+  ],
+  "Expression": [
+    "]",
+    "<=",
+    "==",
+    "!=",
+    "<",
+    ";",
     ")",
-    "+"
+    ">=",
+    ">"
   ],
-  "D": [
-    "+",
+  "SimpleType": [
+    "=",
+    ">",
+    ";"
+  ],
+  "Sign": [],
+  "Condition": [
+    "{"
+  ],
+  "Read": [
     "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "Write": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "StatementP": [
+    "\u03b5",
+    "}"
+  ],
+  "OptionalElse": [
+    "\u03b5",
+    "fi",
+    "}",
+    "$>>",
+    "SimpleIdentifier",
+    "loop",
+    "$<<",
+    "var"
+  ],
+  "Operand": [
+    "<",
+    "]",
     "*",
-    ")"
+    "/",
+    "%",
+    "<=",
+    ";",
+    "-",
+    ")",
+    ">=",
+    "==",
+    ">",
+    "+",
+    "!="
+  ],
+  "Operator": [
+    "Constant",
+    "SimpleIdentifier"
+  ],
+  "Relation": [
+    "Constant",
+    "SimpleIdentifier"
+  ],
+  "Identifier": [
+    "]",
+    "/",
+    "%",
+    "<=",
+    "==",
+    "=",
+    "+",
+    "!=",
+    "<",
+    "*",
+    ";",
+    "-",
+    ")",
+    ">=",
+    ">",
+    ":"
+  ],
+  "IdentifierSufix": [
+    "]",
+    "/",
+    "%",
+    "<=",
+    "==",
+    "=",
+    "+",
+    "!=",
+    "<",
+    "*",
+    ";",
+    "-",
+    ")",
+    ">=",
+    ">",
+    ":"
+  ],
+  "ExpressionP": [
+    "<",
+    "]",
+    "<=",
+    ";",
+    ")",
+    ">=",
+    "==",
+    ">",
+    "!="
+  ],
+  "ExpressionRightCond": [
+    "{"
   ]
 }

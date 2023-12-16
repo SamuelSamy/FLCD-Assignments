@@ -1,5 +1,7 @@
 import json
 
+from scanner import Scanner
+
 from parser_out import ParserOutput
 
 from LL1 import LL1
@@ -106,6 +108,36 @@ def main():
             break
 
 
+def create_sequence():
+    scanner = Scanner("06/in/pe.in", "06/in/token.in")
+    scanner.scan()
+    pif = scanner.pif_table
+
+    tokens = {}
+
+    for token_type in scanner.tokens.keys():
+        for token, value in scanner.tokens[token_type].items():
+            tokens[value] = token
+
+    print(tokens)
+
+    sequence = []
+    for token, pos in pif:
+        if token == 1:
+            sequence.append("SimpleIdentifier")
+            continue
+
+        if token == 2:
+            sequence.append("Constant")
+            continue
+
+        sequence.append(tokens[token])
+
+    with open("06/seq.txt", "w") as file:
+        file.write(" ".join(sequence))
+
+
 if __name__ == '__main__':
+    create_sequence()
     main()
     
