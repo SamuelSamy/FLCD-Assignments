@@ -1,0 +1,17 @@
+var array: vector<number>;
+var len: number;
+
+$<< len;
+
+let i in seq(len) {
+    $<< array[i];
+}
+
+var sum: number = 0;
+
+loop (len) {
+    dec len;
+    sum += array[len];
+}   
+
+$>> sum;

@@ -1,0 +1,13 @@
+var n1: number = 'test'
+var n2: number;
+
+$<< n1;
+$<< n2;
+
+var max: number = n1;
+
+fi (n2 $ max) {
+    max | n2;
+}
+
+$>> max;

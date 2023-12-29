@@ -1,33 +1,48 @@
-Alphabet: 
-    - Upper (A-Z) and lower case letters (a-z) of the English alphabet
-    - Decimal Digits (0-9)
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int currentLine = 1;
+%}
 
+%option noyywrap
 
-1. Lexic
+IDENTIFIER		[a-zA-Z][a-zA-Z0-9]*
+NUMBER_CONST	[+|-]?(0|[1-9][0-9]*)
+DECIMAL_CONST	[+|-]?(0|[1-9][0-9]*)\.[0-9]+
+CHAR_CONST		[a-zA-Z0-9]
+STRING_CONST	\"[a-zA-Z0-9]*\"
 
-a.
-- operators: inc, dec, =, ==, >=, <=, *, /, %, +, -, <, >
-- separators: [ ] { } ( ) : ; space  \t \n
-- reserved words:
-    number, decimal, str, car, let, seq, loop, vector, fi, fie, fiefi, $<<, $>>, rad, var
+%%
 
-b. 
+"number"|"decimal"|"str"|"car"|"let"|"seq"|"loop"|"vector"|"fi"|"fie"|"fiefi"|"\\$<<"|"\\$>>"|"rad"|"var"	{printf("Reserved word: %s\n", yytext);}
+"inc"|"dec"|"="|"=="|">="|"<="|"*"|"/"|"%"|"+"|"-"|"<"|">"	{printf("Operator: %s\n", yytext);}
+"{"|"}"|"("|")"|"["|"]"|":"|";"		{printf("Separator: %s\n", yytext);}
+{IDENTIFIER}		{printf("Identifier: %s\n", yytext);}
+{NUMBER_CONST}		{printf("Number: %s\n", yytext);}
+{DECIMAL_CONST}		{printf("Decimal: %s\n", yytext);}
+{STRING_CONST}		{printf("String: %s\n", yytext);}
+{CHAR_CONST}		{printf("Character: %s\n", yytext);}
 
-identifier := letter | letter{letter}{digit}
-letter := "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
-digit := "0" | "1" | ... | "9"
-non_zero_digit := "1" | ... | "9"
+[ \t]+		{}
+[\n]+	{currentLine++;}
 
-number rule:
-    number_const := ("+" | "-") number | number
-    number := "0" | non_zero_digit{digit}
+%%
 
-deciaml rule:
-    decimal_const := ("+" | "-")decimal | decimal
-    decimal := number "." number
+int main(int argc, char** argv)
+{           
+    if (argc > 1)
+    {
+        FILE *file;
+        file = fopen(argv[1], "r");
+        if (!file)
+        {
+            fprintf(stderr, "Could not open %s\n", argv[1]);
+            exit(1);
+        }
+        yyin = file;
+    }
 
-car rule:
-    car := letter | digit
-
-string rule:
-    str := {car}
+    yylex();
+    return 0;
+}
