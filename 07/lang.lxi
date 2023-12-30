@@ -15,7 +15,7 @@ CHAR_CONST		[\'][a-zA-Z0-9 ][\']
 
 %%
 
-"read"|"write"|"if"|"else"|"for"|"while"|"int"|"string"|"char"|"return"|"start"|"array"		{printf("Reserved word: %s\n", yytext);}
+"number"|"decimal"|"str"|"car"|"let"|"seq"|"loop"|"vector"|"fi"|"fie"|"$<<"|"$>>"|"var"|"in"		{printf("Reserved word: %s\n", yytext);}
 "+"|"-"|"*"|"/"|"%"|"<="|">="|"=="|"!="|"<"|">"|"="		{printf("Operator: %s\n", yytext);}
 "{"|"}"|"("|")"|"["|"]"|":"|";"|","|"'"|"\""		{printf("Separator: %s\n", yytext);}
 {IDENTIFIER}		{printf("Identifier: %s\n", yytext);}
