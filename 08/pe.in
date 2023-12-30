@@ -1,18 +1,17 @@
-var array: vector<number>;
-var len: number;
+var n1: number;
+var n2: number;
+var n3: number;
 
-$<< len;
+$<< n1;
+$<< n2;
+$<< n3;
 
-loop (len > 0) {
-    len = len - 1;
-    $<< array[i];
+var max: number = n1;
+
+fi(n2>=max max=n2;}
+
+fi (n3 > max) {
+    max = n3;
 }
 
-var sum: number = 0;
-
-loop (len 0) {
-    len = len - 1;
-    sum = sum + array[len];
-}   
-
-$>> sum;
+$>> max;
