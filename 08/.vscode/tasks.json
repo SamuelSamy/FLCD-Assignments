@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "command": "bash",
+    "args": [
+        "-c"
+    ],
+    "tasks": [
+        {
+            "label": "yacc",
+            "command": "yacc lang.y -d | flex lang.lxi | cc -o parser lex.yy.c lang.tab.c",
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ]
+}
